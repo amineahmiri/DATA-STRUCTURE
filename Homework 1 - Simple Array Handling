@@ -1,0 +1,93 @@
+/*
+Write a working C++ program to ask the user for a set of grades which are to be stored in an array in increasing sequence.  The user must first provide the number which represents the count of all grades to be provided.  For example, if there will be 10 grades, the user is first prompted to provide the number 10.  Subsequently, each grade is provided, one at a time.  Allow for a maximum of 30 grades in defining the array.  When all the grades have been sorted properly, print them all, along with the average.
+
+Process the array using a function which is invoked from the main body of the program.  The main body asks for the count of grades and then  invokes the grade sequencing function.
+
+You must write in proper C++ syntax and actually execute the program to ensure it works properly.
+*/
+//  Name : AMINE AHMIRI
+//  Course : CIS277
+//  Created by amine ahmiri on 02/01/19.
+//  Copyright © 2019 amine ahmiri. All rights reserved.
+//
+
+#include <iostream>
+using namespace std;
+
+//////////////////////////
+
+float sequence(float A[], int size)
+{
+    float avg = 0;
+    float sum = 0;
+    float min = 0;
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    
+    for(i=0;i<size;i++)
+    {
+        sum = sum + A[i];
+        min = A[i];
+        k = i;
+        for(j=i+1;j<size;j++)
+        {
+            if(A[j]< min)
+            {
+                min = A[j];
+                k = j;
+            }
+        }
+        if (min != A[i])
+        {
+            float temp = A[i];
+            A[i] = A[k];
+            A[k] = temp;
+        }
+    }
+    
+    avg = sum/size;
+    
+    return avg;
+}
+
+
+int main()
+{
+    int count = 0;
+    cout<<"Enter the number of grades :";
+    cin>>count;
+    while(count>30 || count<0)
+    {
+        cout<<"Enter a whole number in the range [0,30] :";
+        cin>>count;
+    }
+    
+    float Grades[count];
+    cout<<"Enter the Grades:";
+    for(int i = 0; i<count; i++)
+    {
+        cout<<"\ngrade "<<i+1<<" = ";
+        cin>>Grades[i];
+    }
+    
+    float avg = sequence(Grades, count);
+    
+    cout<<"The Average of Grades = "<< avg<<endl;
+    cout<<"The Sorted Grades:";
+    for(int i = 0; i<count; i++)
+    {
+        cout<<"\ngrade "<<i<<" = "<<Grades[i];
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
